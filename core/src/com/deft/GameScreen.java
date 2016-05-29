@@ -5,6 +5,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.deft.entities.Player;
 import com.deft.systems.RenderingSystem;
 
@@ -16,12 +18,16 @@ public class GameScreen implements Screen {
     Music bgm;
     Engine engine = new Engine();
     SpriteBatch batch = new SpriteBatch();
+    World world;
+    Player player;
 
     GameScreen(Game game) {
+        world = new World(new Vector2(0, -9.81f), true);
+        player = new Player(world, "Player");
         bgm = assets.loadMusic("boop");
         bgm.play();
-        engine.addEntity(new Player("Player"));
-        engine.addSystem(new RenderingSystem(batch));
+        engine.addEntity(player);
+        engine.addSystem(new RenderingSystem(batch, world, player));
     }
 
     @Override
