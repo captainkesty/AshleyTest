@@ -1,5 +1,6 @@
 package com.deft.entities;
 
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -18,7 +19,7 @@ public class Player extends Entity {
         this.name = name;
         add(new HealthComponent());
         add(new PositionComponent());
-        add(new BodyComponent(world));
-        position = new Vector2(this.getComponent(PositionComponent.class).position);
+        position = ComponentMapper.getFor(PositionComponent.class).get(this).position;
+        add(new BodyComponent(world, position));
     }
 }

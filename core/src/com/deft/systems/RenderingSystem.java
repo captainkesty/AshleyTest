@@ -3,6 +3,8 @@ package com.deft.systems;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
@@ -34,17 +36,17 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         world.step(1 / 60f, 6, 2);
         camera.render(player.position);
         sb.setProjectionMatrix(camera.combined);
-        System.out.println("rendering");
         sb.begin();
         try {
             b2dr.render(world, camera.combined);
             tiledMapRenderer.setView(camera);
             tiledMapRenderer.render();
         } catch (Exception e) {
-            System.out.println("no map loaded");
         }
         sb.end();
     }

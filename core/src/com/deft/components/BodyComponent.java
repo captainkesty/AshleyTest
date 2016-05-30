@@ -1,7 +1,9 @@
 package com.deft.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
@@ -14,14 +16,15 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class BodyComponent implements Component {
     PolygonShape shape;
-    Body body;
+    public Body body;
     BodyDef bdef;
     FixtureDef fdef;
 
-    public BodyComponent(World world) {
+    public BodyComponent(World world, Vector2 position) {
         bdef = new BodyDef();
         shape = new PolygonShape();
-        bdef.type = BodyDef.BodyType.StaticBody;
+        bdef.position.set(position);
+        bdef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bdef);
         body.setFixedRotation(true);
         body.setSleepingAllowed(false);

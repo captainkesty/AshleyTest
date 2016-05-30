@@ -9,7 +9,7 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class CameraRenderer extends OrthographicCamera {
     public CameraRenderer() {
-        setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        setToOrtho(false, 32 * 19, 32 * 10);
     }
 
     public void render(Vector2 xy) {

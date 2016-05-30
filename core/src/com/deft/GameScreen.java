@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.deft.entities.Player;
+import com.deft.systems.MovementSystem;
 import com.deft.systems.RenderingSystem;
 
 /**
@@ -28,6 +29,7 @@ public class GameScreen implements Screen {
         bgm.play();
         engine.addEntity(player);
         engine.addSystem(new RenderingSystem(batch, world, player));
+        engine.addSystem(new MovementSystem());
     }
 
     @Override
