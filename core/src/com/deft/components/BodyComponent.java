@@ -19,8 +19,11 @@ public class BodyComponent implements Component {
     public Body body;
     BodyDef bdef;
     FixtureDef fdef;
+    float width, height;
 
     public BodyComponent(World world, Vector2 position) {
+        width = 20;
+        height = 20;
         bdef = new BodyDef();
         shape = new PolygonShape();
         bdef.position.set(position);
@@ -29,7 +32,7 @@ public class BodyComponent implements Component {
         body.setFixedRotation(true);
         body.setSleepingAllowed(false);
 
-        shape.setAsBox(20f, 20f);
+        shape.setAsBox(width, height);
         fdef = new FixtureDef();
         fdef.shape = shape;
         body.createFixture(fdef);
