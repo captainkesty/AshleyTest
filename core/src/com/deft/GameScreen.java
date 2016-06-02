@@ -2,6 +2,8 @@ package com.deft;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -24,12 +26,12 @@ public class GameScreen implements Screen {
 
     GameScreen(Game game) {
         world = new World(new Vector2(0, -9.81f), true);
-        player = new Player(world, "Player");
+        player = new Player(world, "player");
         bgm = assets.loadMusic("boop");
         bgm.play();
+        engine.addEntity(player);
         engine.addSystem(new RenderingSystem(batch, world, player));
         engine.addSystem(new MovementSystem());
-        engine.addEntity(player);
     }
 
     @Override

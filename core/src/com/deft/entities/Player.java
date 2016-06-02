@@ -7,22 +7,21 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.deft.components.AnimationComponent;
 import com.deft.components.BodyComponent;
 import com.deft.components.HealthComponent;
+import com.deft.components.MovementComponent;
 import com.deft.components.PositionComponent;
 import com.deft.components.SpriteComponent;
+import com.deft.components.StateComponent;
 
 /**
  * Created by k9sty on 2016-05-28.
  */
 public class Player extends Entity {
-    private String name;
-    public Vector2 position;
 
     public Player(World world, String name) {
-        this.name = name;
-        add(new HealthComponent());
+        add(new AnimationComponent(name));
         add(new PositionComponent());
-        position = ComponentMapper.getFor(PositionComponent.class).get(this).position;
-        add(new BodyComponent(world, position));
-        add(new AnimationComponent("player"));
+        add(new BodyComponent(world, ComponentMapper.getFor(PositionComponent.class).get(this).position));
+        add(new HealthComponent());
+        add(new StateComponent());
     }
 }

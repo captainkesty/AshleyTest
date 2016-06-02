@@ -5,6 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -15,6 +16,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.deft.CameraRenderer;
 import com.deft.components.AnimationComponent;
+import com.deft.components.BodyComponent;
 import com.deft.components.PositionComponent;
 import com.deft.components.SpriteComponent;
 import com.deft.components.StateComponent;
@@ -33,7 +35,7 @@ public class RenderingSystem extends IteratingSystem {
     Array<Entity> renderQ;
 
     public RenderingSystem(SpriteBatch batch, World world, Player player) {
-        super(Family.all(SpriteComponent.class, PositionComponent.class, StateComponent.class).get());
+        super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class).get());
         sb = batch;
         renderQ = new Array<Entity>();
         this.world = world;
@@ -42,18 +44,23 @@ public class RenderingSystem extends IteratingSystem {
         b2dr = new Box2DDebugRenderer();
     }
 
+    BodyComponent bc;
+    PositionComponent pc;
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         world.step(1 / 60f, 6, 2);
-        camera.render(player.position);
+        camera.render(player.getComponent(PositionComponent.class).position);
         sb.setProjectionMatrix(camera.combined);
         for (Entity entity : renderQ) {
-            System.out.println("a");
             AnimationComponent a = ComponentMapper.getFor(AnimationComponent.class).get(entity);
-            a.render(sb, entity);
+            a.render(sb, entity, camera);
+
+            bc = ComponentMapper.getFor(BodyComponent.class).get(entity);
+            pc = ComponentMapper.getFor(PositionComponent.class).get(entity);
+            pc.position = bc.body.getPosition();
         }
         try {
             b2dr.render(world, camera.combined);

@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.deft.CameraRenderer;
 
 /**
  * Created by kesty on 6/1/2016.
@@ -27,9 +28,9 @@ public class AnimationComponent implements Component {
         System.out.println("animinit");
     }
 
-    public void render(SpriteBatch sb, Entity entity) {
-        System.out.println("rendering");
+    public void render(SpriteBatch sb, Entity entity, CameraRenderer c) {
         Vector2 pos = new Vector2(entity.getComponent(PositionComponent.class).position);
+        sb.setProjectionMatrix(c.combined);
         elapsedTime++;
 
 
@@ -45,10 +46,10 @@ public class AnimationComponent implements Component {
         int height = textureRegion.getRegionHeight();
 
         if (entity.getComponent(StateComponent.class).getRight())
-            sb.draw(textureRegion, pos.x - width / 4f, pos.y - height / 4f, width, height);
+            sb.draw(textureRegion, pos.x - width / 2, pos.y - height / 2, width, height);
 
         else
-            sb.draw(textureRegion, pos.x + width / 4f, pos.y - height / 4f, -width, height);
+            sb.draw(textureRegion, pos.x + width / 2, pos.y - height / 2, -width, height);
         sb.end();
     }
 }
