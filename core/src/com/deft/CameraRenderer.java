@@ -13,7 +13,7 @@ public class CameraRenderer extends OrthographicCamera {
     }
 
     public void render(Vector2 xy) {
-        position.set(xy, 0);
+        //position.set(xy, 0);
         update();
     }
 }

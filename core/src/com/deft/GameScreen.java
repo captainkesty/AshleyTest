@@ -30,8 +30,8 @@ public class GameScreen implements Screen {
         bgm = assets.loadMusic("boop");
         bgm.play();
         engine.addEntity(player);
-        engine.addSystem(new RenderingSystem(batch, world, player));
         engine.addSystem(new MovementSystem());
+        engine.addSystem(new RenderingSystem(batch, world, player));
     }
 
     @Override

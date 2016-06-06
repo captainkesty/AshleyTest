@@ -13,32 +13,27 @@ import com.deft.components.BodyComponent;
 import com.deft.components.MovementComponent;
 import com.deft.components.PositionComponent;
 
-/**
- * Created by k9sty on 2016-05-28.
- */
 public class MovementSystem extends IteratingSystem {
-    BodyComponent bc;
-    PositionComponent pc;
-    Array<Entity> entities;
+    Array<Entity> renderQ;
 
     public MovementSystem() {
-        super(Family.one(BodyComponent.class, PositionComponent.class).get());
-        entities = new Array<Entity>();
+        super(Family.all(BodyComponent.class, PositionComponent.class).get(), 1);
+        renderQ = new Array<Entity>();
     }
 
     @Override
     public void update(float deltaTime) {
-        for (Entity e : entities) {
-            bc = ComponentMapper.getFor(BodyComponent.class).get(e);
-            pc = ComponentMapper.getFor(PositionComponent.class).get(e);
+        super.update(deltaTime);
+        for (Entity e : renderQ) {
+            BodyComponent bc = ComponentMapper.getFor(BodyComponent.class).get(e);
+            PositionComponent pc = ComponentMapper.getFor(PositionComponent.class).get(e);
             pc.position = bc.body.getPosition();
         }
-        System.out.println(entities);
-        entities.clear();
+        renderQ.clear();
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        entities.add(entity);
+        renderQ.add(entity);
     }
 }
