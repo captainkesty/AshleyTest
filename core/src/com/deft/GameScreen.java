@@ -35,7 +35,6 @@ public class GameScreen implements Screen {
         engine.addEntity(player);
         engine.addSystem(new MovementSystem(player));
         engine.addSystem(new RenderingSystem(batch, world, player, map));
-        Gdx.input.setInputProcessor(new com.deft.adapters.Input(player));
     }
 
     @Override

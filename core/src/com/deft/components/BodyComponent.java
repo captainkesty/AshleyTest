@@ -22,8 +22,8 @@ public class BodyComponent implements Component {
     float width, height;
 
     public BodyComponent(World world, Vector2 position) {
-        width = 20;
-        height = 20;
+        width = 10;
+        height = 10;
         bdef = new BodyDef();
         shape = new PolygonShape();
         bdef.position.set(position);

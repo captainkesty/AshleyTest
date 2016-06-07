@@ -1,6 +1,7 @@
 package com.deft.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.ComponentMapper;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Animation;
@@ -18,37 +19,37 @@ public class AnimationComponent implements Component {
     TextureAtlas taWalk;
     Animation aniIdle, aniWalk;
     float elapsedTime = 0;
+    StateComponent sc;
 
-    public AnimationComponent(String host) {
+    public AnimationComponent(String host, Entity player) {
         taIdle = new TextureAtlas(Gdx.files.internal(host + "/idle/idle.pack"));
         taWalk = new TextureAtlas(Gdx.files.internal(host + "/run/run.pack"));
         aniIdle = new Animation(10, taIdle.getRegions());
         aniWalk = new Animation(10, taWalk.getRegions());
-        System.out.println("animinit");
+        sc = ComponentMapper.getFor(StateComponent.class).get(player);
     }
 
     public void render(SpriteBatch sb, Entity entity, CameraRenderer c) {
         Vector2 pos = new Vector2(entity.getComponent(PositionComponent.class).position);
+        float width = entity.getComponent(BodyComponent.class).width;
+        float height = entity.getComponent(BodyComponent.class).height;
         sb.setProjectionMatrix(c.combined);
         elapsedTime++;
 
 
         TextureRegion textureRegion;
         sb.begin();
-        if (entity.getComponent(StateComponent.class).getIdle())
+        if (sc.getIdle())
             textureRegion = aniIdle.getKeyFrame(elapsedTime, true);
 
         else
             textureRegion = aniWalk.getKeyFrame(elapsedTime, true);
 
-        int width = textureRegion.getRegionWidth();
-        int height = textureRegion.getRegionHeight();
-
-        if (entity.getComponent(StateComponent.class).getRight())
-            sb.draw(textureRegion, pos.x - width / 2, pos.y - height / 2, width, height);
+        if (sc.getRight())
+            sb.draw(textureRegion, pos.x - width, pos.y - height, width * 2, height * 2);
 
         else
-            sb.draw(textureRegion, pos.x + width / 2, pos.y - height / 2, -width, height);
+            sb.draw(textureRegion, pos.x + width, pos.y - height, -width * 2, height * 2);
         sb.end();
     }
 }

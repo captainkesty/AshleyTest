@@ -33,7 +33,7 @@ public class RenderingSystem extends IteratingSystem {
     Array<Entity> renderQ;
 
     public RenderingSystem(SpriteBatch batch, World world, Player player, Map map) {
-        super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class).get(), 2);
+        super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class).get());
         sb = batch;
         renderQ = new Array<Entity>();
         this.world = world;

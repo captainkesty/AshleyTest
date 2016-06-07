@@ -8,29 +8,26 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.Array;
 import com.deft.components.BodyComponent;
+import com.deft.components.MovementComponent;
 import com.deft.components.PositionComponent;
 import com.deft.entities.Player;
 
 public class MovementSystem extends IteratingSystem {
     Array<Entity> renderQ;
     Player player;
+    MovementComponent mc;
 
     public MovementSystem(Player player) {
-        super(Family.all(BodyComponent.class, PositionComponent.class).get(), 1);
+        super(Family.all(BodyComponent.class, PositionComponent.class).get());
         renderQ = new Array<Entity>();
         this.player = player;
+        mc = ComponentMapper.getFor(MovementComponent.class).get(player);
     }
 
     @Override
     public void update(float deltaTime) {
         super.update(deltaTime);
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            BodyComponent bc = ComponentMapper.getFor(BodyComponent.class).get(player);
-            bc.body.setLinearVelocity(bc.body.getMass() * -100, bc.body.getLinearVelocity().y);
-        } else if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-            BodyComponent bc = ComponentMapper.getFor(BodyComponent.class).get(player);
-            bc.body.setLinearVelocity(bc.body.getMass() * 100, bc.body.getLinearVelocity().y);
-        }
+        mc.move();
         for (Entity e : renderQ) {
             BodyComponent bc = ComponentMapper.getFor(BodyComponent.class).get(e);
             PositionComponent pc = ComponentMapper.getFor(PositionComponent.class).get(e);
