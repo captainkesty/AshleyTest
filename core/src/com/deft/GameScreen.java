@@ -3,12 +3,12 @@ package com.deft;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.deft.entities.Map;
 import com.deft.entities.Player;
 import com.deft.systems.MovementSystem;
 import com.deft.systems.RenderingSystem;
@@ -23,15 +23,19 @@ public class GameScreen implements Screen {
     SpriteBatch batch = new SpriteBatch();
     World world;
     Player player;
+    Map map;
 
     GameScreen(Game game) {
-        world = new World(new Vector2(0, -9.81f), true);
+        world = new World(new Vector2(0, -200), true);
         player = new Player(world, "player");
+        map = new Map(world, "debugroom");
         bgm = assets.loadMusic("boop");
         bgm.play();
+        engine.addEntity(map);
         engine.addEntity(player);
-        engine.addSystem(new MovementSystem());
-        engine.addSystem(new RenderingSystem(batch, world, player));
+        engine.addSystem(new MovementSystem(player));
+        engine.addSystem(new RenderingSystem(batch, world, player, map));
+        Gdx.input.setInputProcessor(new com.deft.adapters.Input(player));
     }
 
     @Override
