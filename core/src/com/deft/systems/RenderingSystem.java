@@ -25,7 +25,7 @@ import com.deft.entities.Player;
  */
 public class RenderingSystem extends IteratingSystem {
     CameraRenderer camera;
-    TiledMapRenderer tiledMapRenderer;
+    public static TiledMapRenderer tiledMapRenderer;
     Box2DDebugRenderer b2dr;
     World world;
     SpriteBatch sb;

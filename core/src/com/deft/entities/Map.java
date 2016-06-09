@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
 public class Map extends Entity {
-    Box2DMapObjectParser b2dmop;
+    public Box2DMapObjectParser b2dmop;
     String MAP_NAME;
 
     public Map(World world, String MAP_NAME) {

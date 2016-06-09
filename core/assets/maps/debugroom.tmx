@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="30" tilewidth="16" tileheight="16" nextobjectid="71">
- <tileset firstgid="1" name="collision" tilewidth="16" tileheight="16" tilecount="7">
+ <tileset firstgid="1" name="collision" tilewidth="16" tileheight="16" tilecount="7" columns="7">
   <image source="tilesets/collision.png" width="112" height="16"/>
  </tileset>
- <tileset firstgid="8" name="debug" tilewidth="16" tileheight="16" tilecount="128">
+ <tileset firstgid="8" name="debug" tilewidth="16" tileheight="16" tilecount="128" columns="16">
   <image source="tilesets/debug.png" width="256" height="128"/>
  </tileset>
  <imagelayer name="bg">
-  <image source="backgrounds/debug_bg.png"/>
+  <image source="backgrounds/debug_bg.png" width="32" height="32"/>
   <properties>
    <property name="key" value="debug_bg"/>
   </properties>
@@ -455,6 +455,7 @@
    <properties>
     <property name="bgm" value="none"/>
     <property name="isSensor" value="true"/>
+    <property name="userData" type="int" value="0"/>
    </properties>
   </object>
   <object id="62" name="wall" type="fixture" x="160" y="64" width="32" height="16">

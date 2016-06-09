@@ -8,6 +8,8 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.deft.adapters.DebugInput;
+import com.deft.adapters.Multiplexer;
 import com.deft.entities.Map;
 import com.deft.entities.Player;
 import com.deft.systems.MovementSystem;
@@ -23,11 +25,13 @@ public class GameScreen implements Screen {
     SpriteBatch batch = new SpriteBatch();
     World world;
     Player player;
-    Map map;
+    public static Map map;
+    Multiplexer multiplexer = new Multiplexer();
 
     GameScreen(Game game) {
         world = new World(new Vector2(0, -200), true);
-        player = new Player(world, "player");
+        player = new Player(world, "player", multiplexer);
+        multiplexer.addProcessor(new DebugInput(engine, world));
         map = new Map(world, "debugroom");
         bgm = assets.loadMusic("boop");
         bgm.play();
@@ -35,6 +39,7 @@ public class GameScreen implements Screen {
         engine.addEntity(player);
         engine.addSystem(new MovementSystem(player));
         engine.addSystem(new RenderingSystem(batch, world, player, map));
+        Gdx.input.setInputProcessor(multiplexer);
     }
 
     @Override
