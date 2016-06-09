@@ -1,0 +1,237 @@
+
+textures.png
+size: 2048,2048
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+maps/backgrounds/brown
+  rotate: false
+  xy: 1542, 1880
+  size: 256, 160
+  orig: 256, 160
+  offset: 0, 0
+  index: -1
+maps/backgrounds/debug_bg
+  rotate: false
+  xy: 1028, 1017
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+maps/backgrounds/greenpassage
+  rotate: false
+  xy: 2, 502
+  size: 256, 512
+  orig: 256, 512
+  offset: 0, 0
+  index: -1
+maps/backgrounds/pipecorridor
+  rotate: false
+  xy: 1028, 1784
+  size: 512, 256
+  orig: 512, 256
+  offset: 0, 0
+  index: -1
+maps/backgrounds/sr388cave
+  rotate: false
+  xy: 260, 758
+  size: 512, 256
+  orig: 512, 256
+  offset: 0, 0
+  index: -1
+maps/resources/2ypcht4
+  rotate: false
+  xy: 2, 1016
+  size: 1024, 1024
+  orig: 1024, 1024
+  offset: 0, 0
+  index: -1
+maps/sprites/door
+  rotate: false
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+maps/tilesets/collision
+  rotate: false
+  xy: 774, 998
+  size: 112, 16
+  orig: 112, 16
+  offset: 0, 0
+  index: -1
+maps/tilesets/corridor1
+  rotate: false
+  xy: 1028, 1092
+  size: 256, 304
+  orig: 256, 304
+  offset: 0, 0
+  index: -1
+maps/tilesets/debug
+  rotate: false
+  xy: 260, 496
+  size: 256, 128
+  orig: 256, 128
+  offset: 0, 0
+  index: -1
+maps/tilesets/srx
+  rotate: false
+  xy: 2, 68
+  size: 256, 432
+  orig: 256, 432
+  offset: 0, 0
+  index: -1
+maps/tilesets/yellow
+  rotate: false
+  xy: 1028, 1398
+  size: 256, 384
+  orig: 256, 384
+  offset: 0, 0
+  index: -1
+player/idle/idle
+  rotate: false
+  xy: 260, 692
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+player/idle/idle (1)
+  rotate: false
+  xy: 1542, 1796
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (2)
+  rotate: false
+  xy: 1800, 1958
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (3)
+  rotate: false
+  xy: 260, 412
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (4)
+  rotate: false
+  xy: 518, 542
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (5)
+  rotate: false
+  xy: 774, 914
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (6)
+  rotate: false
+  xy: 1286, 1659
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (7)
+  rotate: false
+  xy: 1800, 1915
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (8)
+  rotate: false
+  xy: 260, 369
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/idle/idle (9)
+  rotate: false
+  xy: 518, 499
+  size: 34, 41
+  orig: 34, 41
+  offset: 0, 0
+  index: -1
+player/run/run
+  rotate: false
+  xy: 260, 626
+  size: 512, 64
+  orig: 512, 64
+  offset: 0, 0
+  index: -1
+player/run/run (1)
+  rotate: false
+  xy: 1286, 1743
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (10)
+  rotate: false
+  xy: 1028, 1051
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (2)
+  rotate: false
+  xy: 1542, 1839
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (3)
+  rotate: false
+  xy: 1800, 2001
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (4)
+  rotate: false
+  xy: 260, 455
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (5)
+  rotate: false
+  xy: 518, 585
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (6)
+  rotate: false
+  xy: 774, 957
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (7)
+  rotate: false
+  xy: 68, 27
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (8)
+  rotate: false
+  xy: 1286, 1702
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1
+player/run/run (9)
+  rotate: false
+  xy: 1328, 1743
+  size: 40, 39
+  orig: 40, 39
+  offset: 0, 0
+  index: -1

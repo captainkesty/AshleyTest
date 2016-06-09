@@ -6,11 +6,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
-import com.deft.GameScreen;
+import com.deft.screens.GameScreen;
 import com.deft.entities.Map;
 import com.deft.systems.RenderingSystem;
-
-import java.util.ArrayList;
 
 /**
  * Created by kesty on 6/9/2016.
