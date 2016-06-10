@@ -1,6 +1,7 @@
 package com.deft.adapters;
 
 import com.badlogic.ashley.core.Engine;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -42,6 +43,9 @@ public class DebugInput implements InputProcessor {
                 RenderingSystem.tiledMapRenderer = new OrthogonalTiledMapRenderer(null);
             } catch (Exception e) {
             }
+        }
+        if (keycode == Input.Keys.V) {
+
         }
         return false;
     }
