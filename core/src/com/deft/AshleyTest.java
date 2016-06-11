@@ -7,8 +7,8 @@ import com.deft.screens.Menu;
 public class AshleyTest extends Game {
     @Override
     public void create() {
-        setScreen(new GameScreen(this));
-//        setScreen(new Menu(this));
+        //setScreen(new GameScreen(this));
+        setScreen(new Menu(this));
     }
 
     @Override

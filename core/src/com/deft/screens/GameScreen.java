@@ -34,11 +34,12 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(Game game) {
         world = new World(new Vector2(0, 0), true);
+        world.setVelocityThreshold(0.1f);
         player = new Player(world, "player", multiplexer);
         multiplexer.addProcessor(new DebugInput(engine, world));
         map = new Map(world, "debugroom");
         bgm = assets.loadMusic("boop");
-        //bgm.play();
+        bgm.play();
         engine.addEntity(map);
         engine.addEntity(player);
         engine.addSystem(new MovementSystem(player));

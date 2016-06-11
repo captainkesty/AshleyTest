@@ -36,7 +36,7 @@ public class MovementComponent implements Component, InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.X)
-            bc.body.applyLinearImpulse(0, 2000, bc.body.getPosition().x, bc.body.getPosition().y, true);
+            bc.body.applyLinearImpulse(0, (float) (1000000000 * 0.02), bc.body.getPosition().x, bc.body.getPosition().y, true);
         return false;
     }
 

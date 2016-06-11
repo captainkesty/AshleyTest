@@ -35,9 +35,9 @@ public class GravitySystem extends IteratingSystem {
         super.update(deltaTime);
         for (Entity entity : renderQ) {
             FootComponent fc = ComponentMapper.getFor(FootComponent.class).get(entity);
-            fc.render(world, c, ComponentMapper.getFor(StateComponent.class).get(entity).getRight(), ComponentMapper.getFor(PositionComponent.class).get(entity).onSlope);
+            fc.render(world, c, ComponentMapper.getFor(PositionComponent.class).get(entity).onSlope);
             BodyComponent bc = ComponentMapper.getFor(BodyComponent.class).get(entity);
-            bc.body.applyLinearImpulse(0, -10, bc.body.getPosition().x, bc.body.getPosition().y, true);
+            bc.body.applyLinearImpulse(0, -5, bc.body.getPosition().x, bc.body.getPosition().y, true);
         }
         renderQ.clear();
     }

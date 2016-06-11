@@ -40,26 +40,36 @@ public class FootComponent implements Component {
         shape.dispose();
     }
 
-    Vector2 intersectionL = new Vector2(0, 0);
-    Vector2 intersectionR = new Vector2(0, 0);
-    Vector2 intersection = new Vector2(0, 0);
+    Vector2 intersectionL = new Vector2();
+    Vector2 intersectionR = new Vector2();
+    Vector2 normalL = new Vector2();
+    Vector2 normalR = new Vector2();
+    float tempX, tempY;
 
-    public void render(World world, Camera camera, boolean right, boolean onSlope) {
+    public void render(World world, Camera camera, boolean onSlope) {
         this.onSlope = onSlope;
         FOOT_POS = new Vector2(bc.body.getPosition().x, bc.body.getPosition().y - 10.2f);
-        raycast(world, right);
-        if ((int) (intersectionL.x - intersectionR.x) == -20) ;// worst hack of the century
+        raycast(world);
+        /*if ((int) (intersectionL.x - intersectionR.x) == -20) ;// worst hack of the century
         else {
             if (FOOT_POS.x - intersectionL.x <= 11 && FOOT_POS.x - intersectionL.x >= 0) {
                 bc.body.setLinearVelocity(0, 10);
-                System.out.println("on slope L");
-                System.out.println(FOOT_POS.x - intersectionL.x);
+                //System.out.println("on slope L");
+                //System.out.println(FOOT_POS.x - intersectionL.x);
             } else if (FOOT_POS.x - intersectionR.x >= -11 && FOOT_POS.x - intersectionR.x <= 0) {
                 bc.body.setLinearVelocity(0, 10);
-                System.out.println("on slope R");
-                System.out.println(FOOT_POS.x - intersectionR.x);
-            } // what the fuck?
-        }
+                //System.out.println("on slope R");
+                //System.out.println(FOOT_POS.x - intersectionR.x);
+            } // what?
+        }*/
+
+        // vector magic
+        System.out.println(intersectionL.dst(FOOT_POS));
+        if (normalL.y != 1 && intersectionL.dst(FOOT_POS) <= 11) {
+            bc.body.setLinearVelocity(0, 5);
+        } else if (normalR.y != 1 && intersectionR.dst(FOOT_POS) <= 11) {
+            bc.body.setLinearVelocity(0, 5);
+        } else ;
 
         shapeDebugger.begin(ShapeRenderer.ShapeType.Line);
         shapeDebugger.setProjectionMatrix(camera.combined);
@@ -75,7 +85,55 @@ public class FootComponent implements Component {
         shapeDebugger.end();
     }
 
-    private void raycast(World world, boolean right) {
+    private void raycast(World world) {
+
+        // LEFT RAYCAST
+
+        world.rayCast(new RayCastCallback() {
+            @Override
+            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+                if (fixture == foot) {
+                    onSlope = false;
+                    tempX = normal.x;
+                    tempY = normal.y;
+                    normalL = new Vector2(tempX, tempY);
+                    return -1;
+                } else {
+                    intersectionL = new Vector2(point.x, point.y);
+                    onSlope = true;
+                    tempX = normal.x;
+                    tempY = normal.y;
+                    normalL = new Vector2(tempX, tempY);
+                    // not doing this rounds the coordinates to the closest integer
+                    return fraction;
+                }
+            }
+        }, new Vector2(bc.body.getPosition().x, bc.body.getPosition().y), new Vector2(FOOT_POS.x - width * 2, FOOT_POS.y - height));
+
+        // RIGHT RAYCAST
+
+        world.rayCast(new RayCastCallback() {
+            @Override
+            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
+                if (fixture == foot) {
+                    onSlope = false;
+                    tempX = normal.x;
+                    tempY = normal.y;
+                    normalR = new Vector2(tempX, tempY);
+                    return -1;
+                } else {
+                    intersectionR = new Vector2(point.x, point.y);
+                    onSlope = true;
+                    tempX = normal.x;
+                    tempY = normal.y;
+                    normalR = new Vector2(tempX, tempY);
+                    return fraction;
+                }
+            }
+        }, new Vector2(bc.body.getPosition().x, bc.body.getPosition().y), new Vector2(FOOT_POS.x + width * 2, FOOT_POS.y - height));
+
+        // HORIZONTAL RAYCASTING [OLD METHOD DO NOT UNCOMMENT OR I'LL KICK YOU]
+
         /*world.rayCast(new RayCastCallback() {
             @Override
             public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
@@ -98,39 +156,5 @@ public class FootComponent implements Component {
                 //return 1: don't clip the ray and continue.
             }
         }, new Vector2(bc.body.getPosition().x, FOOT_POS.y), new Vector2(bc.body.getPosition().x - Gdx.graphics.getWidth() / 2, FOOT_POS.y));*/
-        world.rayCast(new RayCastCallback() {
-            @Override
-            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-                if (fixture == foot) {
-                    onSlope = false;
-                    return -1;
-                } else {
-                    intersectionR = new Vector2(point.x, point.y);
-                    onSlope = true;
-                    return fraction;
-                }
-                //return -1: ignore this fixture and continue
-                //return 0: terminate the ray cast
-                //return fraction: clip the ray to this point
-                //return 1: don't clip the ray and continue.
-            }
-        }, new Vector2(bc.body.getPosition().x, bc.body.getPosition().y), new Vector2(FOOT_POS.x + width * 2, FOOT_POS.y - height));
-        world.rayCast(new RayCastCallback() {
-            @Override
-            public float reportRayFixture(Fixture fixture, Vector2 point, Vector2 normal, float fraction) {
-                if (fixture == foot) {
-                    onSlope = false;
-                    return -1;
-                } else {
-                    intersectionL = new Vector2(point.x, point.y);
-                    onSlope = true;
-                    return fraction;
-                }
-                //return -1: ignore this fixture and continue
-                //return 0: terminate the ray cast
-                //return fraction: clip the ray to this point
-                //return 1: don't clip the ray and continue.
-            }
-        }, new Vector2(bc.body.getPosition().x, bc.body.getPosition().y), new Vector2(FOOT_POS.x - width * 2, FOOT_POS.y - height));
     }
 }
