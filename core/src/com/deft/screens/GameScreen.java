@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.deft.Assets;
+import com.deft.CameraRenderer;
 import com.deft.adapters.DebugInput;
 import com.deft.adapters.Multiplexer;
 import com.deft.entities.Map;
@@ -29,6 +30,7 @@ public class GameScreen extends ScreenAdapter {
     Player player;
     public static Map map;
     Multiplexer multiplexer = new Multiplexer();
+    CameraRenderer c = new CameraRenderer();
 
     public GameScreen(Game game) {
         world = new World(new Vector2(0, 0), true);
@@ -40,10 +42,11 @@ public class GameScreen extends ScreenAdapter {
         engine.addEntity(map);
         engine.addEntity(player);
         engine.addSystem(new MovementSystem(player));
-        engine.addSystem(new RenderingSystem(batch, world, player, map));
-        engine.addSystem(new GravitySystem());
+        engine.addSystem(new RenderingSystem(batch, world, c, player, map));
+        engine.addSystem(new GravitySystem(world, c));
         Gdx.input.setInputProcessor(multiplexer);
     }
+
     @Override
     public void render(float delta) {
         engine.update(delta);

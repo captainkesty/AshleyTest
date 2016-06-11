@@ -24,21 +24,21 @@ import com.deft.entities.Player;
  * Created by k9sty on 2016-05-28.
  */
 public class RenderingSystem extends IteratingSystem {
-    CameraRenderer camera;
     public static TiledMapRenderer tiledMapRenderer;
     Box2DDebugRenderer b2dr;
     World world;
     SpriteBatch sb;
     Player player;
     Array<Entity> renderQ;
+    CameraRenderer camera;
 
-    public RenderingSystem(SpriteBatch batch, World world, Player player, Map map) {
+    public RenderingSystem(SpriteBatch batch, World world, CameraRenderer c, Player player, Map map) {
         super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class, FootComponent.class).get());
         sb = batch;
         renderQ = new Array<Entity>();
         this.world = world;
         this.player = player;
-        camera = new CameraRenderer();
+        camera = c;
         b2dr = new Box2DDebugRenderer();
         tiledMapRenderer = new OrthogonalTiledMapRenderer(map.getMap(), map.getUnitScale());
     }
@@ -60,8 +60,6 @@ public class RenderingSystem extends IteratingSystem {
         for (Entity entity : renderQ) {
             AnimationComponent a = ComponentMapper.getFor(AnimationComponent.class).get(entity);
             a.render(sb, entity, camera);
-            FootComponent fc = ComponentMapper.getFor(FootComponent.class).get(entity);
-            fc.render(world, camera, ComponentMapper.getFor(StateComponent.class).get(entity).getRight(), ComponentMapper.getFor(PositionComponent.class).get(entity).onSlope);
         }
         renderQ.clear();
     }
