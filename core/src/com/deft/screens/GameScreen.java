@@ -13,6 +13,7 @@ import com.deft.adapters.DebugInput;
 import com.deft.adapters.Multiplexer;
 import com.deft.entities.Map;
 import com.deft.entities.Player;
+import com.deft.systems.GravitySystem;
 import com.deft.systems.MovementSystem;
 import com.deft.systems.RenderingSystem;
 
@@ -30,16 +31,17 @@ public class GameScreen extends ScreenAdapter {
     Multiplexer multiplexer = new Multiplexer();
 
     public GameScreen(Game game) {
-        world = new World(new Vector2(0, -200), true);
+        world = new World(new Vector2(0, 0), true);
         player = new Player(world, "player", multiplexer);
         multiplexer.addProcessor(new DebugInput(engine, world));
         map = new Map(world, "debugroom");
         bgm = assets.loadMusic("boop");
-        bgm.play();
+        //bgm.play();
         engine.addEntity(map);
         engine.addEntity(player);
         engine.addSystem(new MovementSystem(player));
         engine.addSystem(new RenderingSystem(batch, world, player, map));
+        engine.addSystem(new GravitySystem());
         Gdx.input.setInputProcessor(multiplexer);
     }
     @Override

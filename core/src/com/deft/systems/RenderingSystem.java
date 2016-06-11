@@ -14,7 +14,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Array;
 import com.deft.CameraRenderer;
 import com.deft.components.AnimationComponent;
-import com.deft.components.BodyComponent;
+import com.deft.components.FootComponent;
 import com.deft.components.PositionComponent;
 import com.deft.components.StateComponent;
 import com.deft.entities.Map;
@@ -33,7 +33,7 @@ public class RenderingSystem extends IteratingSystem {
     Array<Entity> renderQ;
 
     public RenderingSystem(SpriteBatch batch, World world, Player player, Map map) {
-        super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class).get());
+        super(Family.all(AnimationComponent.class, PositionComponent.class, StateComponent.class, FootComponent.class).get());
         sb = batch;
         renderQ = new Array<Entity>();
         this.world = world;
@@ -60,6 +60,8 @@ public class RenderingSystem extends IteratingSystem {
         for (Entity entity : renderQ) {
             AnimationComponent a = ComponentMapper.getFor(AnimationComponent.class).get(entity);
             a.render(sb, entity, camera);
+            FootComponent fc = ComponentMapper.getFor(FootComponent.class).get(entity);
+            fc.render(world, camera, ComponentMapper.getFor(StateComponent.class).get(entity).getRight(), ComponentMapper.getFor(PositionComponent.class).get(entity).onSlope);
         }
         renderQ.clear();
     }

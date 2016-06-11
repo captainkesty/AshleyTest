@@ -11,4 +11,5 @@ public class PositionComponent implements Component {
     public float x = Gdx.graphics.getWidth() / 2;
     public float y = Gdx.graphics.getHeight() / 2;
     public Vector2 position = new Vector2(x, y);
+    public boolean onSlope = false;
 }

@@ -2,11 +2,9 @@ package com.deft.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.math.Vector2;
 import com.deft.entities.Player;
 
 /**
@@ -38,7 +36,7 @@ public class MovementComponent implements Component, InputProcessor {
     @Override
     public boolean keyDown(int keycode) {
         if (keycode == Input.Keys.X)
-            bc.body.setLinearVelocity(new Vector2(bc.body.getLinearVelocity().x, bc.body.getMass() * 500));
+            bc.body.applyLinearImpulse(0, 2000, bc.body.getPosition().x, bc.body.getPosition().y, true);
         return false;
     }
 
