@@ -6,6 +6,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.physics.box2d.World;
+import com.deft.components.BodyID;
 
 import net.dermetfan.gdx.physics.box2d.Box2DMapObjectParser;
 
@@ -14,6 +15,7 @@ public class Map extends Entity {
     String MAP_NAME;
 
     public Map(World world, String MAP_NAME) {
+        add(new BodyID(0, this));
         this.MAP_NAME = MAP_NAME;
         b2dmop = new Box2DMapObjectParser();
         b2dmop.load(world, new TmxMapLoader().load("maps/" + MAP_NAME + ".tmx"));

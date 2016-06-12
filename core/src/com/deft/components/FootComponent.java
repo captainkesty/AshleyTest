@@ -49,7 +49,12 @@ public class FootComponent implements Component {
     public void render(World world, Camera camera, boolean onSlope) {
         this.onSlope = onSlope;
         FOOT_POS = new Vector2(bc.body.getPosition().x, bc.body.getPosition().y - 10.2f);
+        // RESET VECTOR TO THE CENTER OF THE FOOT FIXTURE
+
         raycast(world);
+
+        // THIS STILL TECHNICALLY WORKS BUT IS LIMITED IN USABILITY
+
         /*if ((int) (intersectionL.x - intersectionR.x) == -20) ;// worst hack of the century
         else {
             if (FOOT_POS.x - intersectionL.x <= 11 && FOOT_POS.x - intersectionL.x >= 0) {
@@ -70,6 +75,8 @@ public class FootComponent implements Component {
         } else if (normalR.y != 1 && intersectionR.dst(FOOT_POS) <= 11) {
             bc.body.setLinearVelocity(0, 5);
         } else ;
+
+        // DEBUG RAYCAST LINE DRAWING
 
         shapeDebugger.begin(ShapeRenderer.ShapeType.Line);
         shapeDebugger.setProjectionMatrix(camera.combined);
