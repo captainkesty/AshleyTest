@@ -15,7 +15,6 @@ public class Map extends Entity {
     String MAP_NAME;
 
     public Map(World world, String MAP_NAME) {
-        add(new BodyID(0, this));
         this.MAP_NAME = MAP_NAME;
         b2dmop = new Box2DMapObjectParser();
         b2dmop.load(world, new TmxMapLoader().load("maps/" + MAP_NAME + ".tmx"));
