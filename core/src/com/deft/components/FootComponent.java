@@ -31,7 +31,7 @@ public class FootComponent implements Component {
         height = bc.height;
         shape = new PolygonShape();
         FOOT_POS = new Vector2(bc.body.getPosition().x - width * 32, bc.body.getPosition().y - (height * 32) + (height * 7) - 0.2f);
-        shape.setAsBox(width, 0.2f, FOOT_POS, 0);
+        shape.setAsBox(width - 2, 0.2f, FOOT_POS, 0);
         fdef = new FixtureDef();
         fdef.filter.maskBits = 1;
         fdef.filter.groupIndex = -2;
@@ -55,7 +55,7 @@ public class FootComponent implements Component {
             bc.body.setLinearVelocity(0, 5);
         } else if (normalR.y != 1 && intersectionR.dst(FOOT_POS) <= 11) {
             bc.body.setLinearVelocity(0, 5);
-        } else ;
+        }
         shapeDebugger.begin(ShapeRenderer.ShapeType.Line);
         shapeDebugger.setProjectionMatrix(camera.combined);
         shapeDebugger.setColor(1, 1, 1, 1);

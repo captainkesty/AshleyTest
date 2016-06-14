@@ -26,7 +26,7 @@ public class Menu extends ScreenAdapter implements InputProcessor {
 
     public Menu(Game game) {
         this.game = game;
-        bgm = assets.loadMusic("menu");
+        bgm = assets.loadMusic("sp");
         bgm.play();
         sb = new SpriteBatch();
 

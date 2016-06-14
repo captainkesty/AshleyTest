@@ -1,8 +1,6 @@
 package com.deft.components;
 
 import com.badlogic.ashley.core.Component;
-import com.badlogic.ashley.core.ComponentMapper;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
@@ -35,6 +33,7 @@ public class BodyComponent implements Component {
         shape.setAsBox(width, height);
         fdef = new FixtureDef();
         fdef.shape = shape;
+        fdef.friction = 0;
         body.createFixture(fdef);
         shape.dispose();
     }
